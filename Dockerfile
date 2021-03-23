@@ -2,11 +2,16 @@ FROM osrf/ros:melodic-desktop-full AS base
 
 RUN apt-get update
 
+# Install System Dependencies
 RUN apt-get install -y \
     python-catkin-tools \
     python-pip \
     xvfb \
     libboost-all-dev 
+
+# Install ROS Dependencies
+RUN apt-get install -y \
+    ros-melodic-velodyne-simulator
 
 RUN pip2 install \
     shapely
