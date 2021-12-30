@@ -3,5 +3,5 @@ version: '3'
 services:
   talkerlistener:
     image: uqr/ws:latest
-    command: roslaunch roscpp_tutorials talker_listener.launch
+    command: cat /ros_entrypoint.sh
     network_mode: host
