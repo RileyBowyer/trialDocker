@@ -1,0 +1,20 @@
+FROM ros:noetic AS base
+
+# Install System Dependencies
+RUN apt-get update
+RUN apt-get install -y \
+  python3-catkin-tools \
+  python3-pip \
+  xvfb \
+  libboost-all-dev
+
+# Install ROS Dependencies
+RUN apt-get install -y \
+  ros-noetic-velodyne-simulator
+
+# Install Python Packages
+RUN pip3 install \
+  shapely
+
+# Clear the cache
+RUN rm -rf /var/lib/apt/lists/*

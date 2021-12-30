@@ -1,0 +1,18 @@
+FROM uqr/base:latest
+
+# Add DV workspace and build
+RUN mkdir -p /ws/dv_ws
+WORKDIR /ws/dv_ws
+
+COPY src src
+RUN catkin init
+RUN catkin config --extend /opt/ros/noetic
+RUN catkin build
+RUN touch /root/.bashrc
+ARG entrypointReplacement="Xvfb :1 -screen 0 1600x1200x16  & \nexport DISPLAY=:1.0 \nsource /ws/dv_ws/devel/setup.bash"
+
+
+# source entrypoint setup
+RUN sed --in-place --expression \
+  '$isource ${entrypointReplacement}' \
+  /ros_entrypoint.sh
